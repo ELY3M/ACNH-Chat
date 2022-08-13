@@ -1,4 +1,7 @@
-"# ACNH-Chat" 
+# ACNH-Chat
+
+# This app is for Android phone only.   
+# I made this app because nooklink SUCKS and it do not work for me.  
 
 ## Prerequisite
 
