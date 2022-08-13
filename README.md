@@ -31,5 +31,6 @@ Thank you to [MyShiLingStar](https://github.com/MyShiLingStar/ACNHPokerCore)
 
 My fucking brain  
 
+## Screenshot
 
-
+   ![Image](screenshot.png)

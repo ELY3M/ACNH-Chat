@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:layout_marginTop="5dip"
-        android:hint="Switch Ip Address" />
+        android:layout_marginTop="75dip"
+        android:hint="Switch IP Address" />
 
     <Button
         android:id="@+id/connect"
@@ -44,7 +44,6 @@
         android:background="@color/silver"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:maxLength="24"
         android:inputType="text"
         android:hint="Chat Text"
