@@ -25,3 +25,11 @@
 4. type in whatever you want.  
 5. Click on "Send Chat"  
 
+## Credit 
+I used some of ACNHPokerCore codes for connection and chat parts. 
+Thank you to [MyShiLingStar](https://github.com/MyShiLingStar/ACNHPokerCore)
+
+My fucking brain  
+
+
+
