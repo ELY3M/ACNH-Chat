@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black"
     android:color="@color/white"
-    android:gravity="center">
+    android:gravity="center_horizontal">
 
     <EditText
         android:id="@+id/ipaddress"
@@ -14,11 +15,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
+        android:layout_marginTop="5dip"
         android:hint="Switch Ip Address" />
 
     <Button
         android:id="@+id/connect"
-        android:textColor="@color/black"       
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Connect"
@@ -30,7 +32,7 @@
 
     <Button
         android:id="@+id/startchat"
-        android:textColor="@color/black"        
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Chat"
@@ -39,7 +41,7 @@
 
     <EditText
         android:id="@+id/chat"
-        android:background="@color/silver"       
+        android:background="@color/silver"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:ems="10"
