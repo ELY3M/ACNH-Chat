@@ -27,7 +27,15 @@
         android:layout_marginTop="5dip"
         android:layout_below="@id/ipaddress" />
 
-
+    <Button
+        android:id="@+id/disconnect"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disconnect"
+        android:layout_marginTop="105dip"
+        android:layout_marginStart="30dip"
+        android:layout_toRightOf="@id/connect" />
 
 
     <Button
@@ -38,6 +46,8 @@
         android:text="Start Chat"
         android:layout_marginTop="10dip"
         android:layout_below="@id/connect" />
+
+
 
     <EditText
         android:id="@+id/chat"

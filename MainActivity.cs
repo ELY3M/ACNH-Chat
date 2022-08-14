@@ -41,6 +41,7 @@ namespace ACNH_Chat
 
         AppCompatEditText ipaddresstext;
         AppCompatButton connectbutton;
+        AppCompatButton disconnectbutton;
 
         AppCompatButton startchat;
         AppCompatEditText chattext;
@@ -65,6 +66,7 @@ namespace ACNH_Chat
 
             ipaddresstext = FindViewById<AppCompatEditText>(Resource.Id.ipaddress);
             connectbutton = FindViewById<AppCompatButton>(Resource.Id.connect);
+            disconnectbutton = FindViewById<AppCompatButton>(Resource.Id.disconnect);
 
             connectbutton.Click += (sender, e) =>
             {
@@ -96,11 +98,20 @@ namespace ACNH_Chat
 
             getipaddress = sp.GetString("ipaddress", "");
             ipaddresstext.Text = getipaddress;
-
-
-
             sendbutton = FindViewById<AppCompatButton>(Resource.Id.send);
 
+
+            disconnectbutton.Click += (sender, e) =>
+            {
+
+                socket.Close();
+                connecting = false;
+                connectbutton.Text = "Connect";
+
+            };
+
+           
+            //start chat
             startchat.Click += (sender, e) =>
             {
                 controller.detachController();
