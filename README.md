@@ -12,7 +12,7 @@
    
 ## Installation
 
-   1. Download APK from release page. 
+   1. Download APK from release page on your phone. 
    2. allow APK from external source. 
    3. install :) 
    
