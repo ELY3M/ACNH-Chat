@@ -42,24 +42,24 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <AndroidKeyStore>True</AndroidKeyStore>
-	  <AndroidSigningStorePass>key103</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>103</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>key103</AndroidSigningKeyPass>
+	  <AndroidSigningStorePass>password</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>name</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>password</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
 	  <AndroidKeyStore>True</AndroidKeyStore>
-	  <AndroidSigningStorePass>key103</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>103</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>key103</AndroidSigningKeyPass>
+	  <AndroidSigningStorePass>password</AndroidSigningStorePass>
+	  <AndroidSigningKeyAlias>name</AndroidSigningKeyAlias>
+	  <AndroidSigningKeyPass>password</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
