@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ACNH_Chat.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            
+            
+            <Image
+                Source="dotnet_bot.png"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a submarine number ten" />
+
+            
+            <Label
+                Text="Switch IP Address"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+
+            <Entry
+                x:Name="ipaddresstext" />
+            
+
+
+            <Button
+                x:Name="connectbutton"
+                Text="Connect to your Switch" 
+                SemanticProperties.Hint="sysbot required"
+                Clicked="Connect"
+                HorizontalOptions="Fill" />
+
+
+
+            <Button
+                x:Name="startchat"
+                Text="Start Chat" 
+                SemanticProperties.Hint="Start chat"
+                Clicked="Startchat"
+                HorizontalOptions="Fill" />
+            
+            
+            <Label
+                Text="Chat Text"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Chat Text" />
+
+            <Entry
+                x:Name="chattext" />
+            
+            <Button
+                x:Name="sendchattext"
+                Text="Send Chat" 
+                SemanticProperties.Hint="Send Chat"
+                Clicked="Sendchat"
+                HorizontalOptions="Fill" />
+            
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
