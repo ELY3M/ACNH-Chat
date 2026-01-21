@@ -51,11 +51,19 @@ jobs:
       ###dotnet publish -c Release -r linux-x64 --self-contained true -o ./publish_ubuntu
       run: dotnet publish -f net10.0-android -c Release
 
+    - name: Show Github infos
+      run:  echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'     
+
+    - name: Show Github infos
+      run: | 
+       echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'
+       dir ${{ github.workspace }}\bin\Release\
+       
     - name: Sign APK
       uses: r0adkll/sign-android-release@v1
       id: sign_app
       with:
-        releaseDirectory: ${{ github.workspace }}\ACNH-Chat\bin\Release\net10.0-android\own.acnhchat.apk
+        releaseDirectory: ${{ github.workspace }}\bin\Release\net10.0-android\own.acnhchat.apk
         signingKeyBase64: ${{ secrets.KEY }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.PASSWORD }}
@@ -70,16 +78,6 @@ jobs:
         echo "SIGNEDAPKNAME=$SIGNEDAPKNAME" >> $GITHUB_ENV
         echo SIGNEDAPKNAME: $SIGNEDAPKNAME
 
-         
-    - name: Show Github infos
-      run:  echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'     
-
-    - name: Show Github infos
-      run: | 
-       echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'
-       dir ${{ github.workspace }}\ACNH-Chat\bin\Release\
-       
-       
       
     - name: Create Release
       uses: actions/create-release@latest
