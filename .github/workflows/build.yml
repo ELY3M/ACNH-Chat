@@ -49,7 +49,9 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       # run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
       ###dotnet publish -c Release -r linux-x64 --self-contained true -o ./publish_ubuntu
-      run: dotnet publish -f net10.0-android -c Release
+      ###dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=myapp.keystore -p:AndroidSigningKeyAlias=myapp -p:AndroidSigningKeyPass=file:C:\Users\user1\AndroidSigningPassword.txt -p:AndroidSigningStorePass=file:C:\Users\user1\AndroidSigningPassword.txt      
+      ###run: dotnet publish -f net10.0-android -c Release
+      run: dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=file:${{ github.workspace }}\key.jks -p:AndroidSigningKeyAlias=103 -p:AndroidSigningKeyPass=fuckyou -p:AndroidSigningStorePass=fuckyou
 
     - name: Show Github infos
       run:  echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'     
