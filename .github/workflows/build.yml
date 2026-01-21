@@ -46,7 +46,7 @@ jobs:
     - name: Decode key
       uses: timheuer/base64-to-file@v1.2
       with:
-       fileName: 'keytest.jks'
+       fileName: 'key.keystore'
        fileDir: ${{ github.workspace }}
        encodedString: ${{ secrets.KEY }}
 
@@ -62,7 +62,7 @@ jobs:
       ###dotnet publish -c Release -r linux-x64 --self-contained true -o ./publish_ubuntu
       ###dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=myapp.keystore -p:AndroidSigningKeyAlias=myapp -p:AndroidSigningKeyPass=file:C:\Users\user1\AndroidSigningPassword.txt -p:AndroidSigningStorePass=file:C:\Users\user1\AndroidSigningPassword.txt      
       ###run: dotnet publish -f net10.0-android -c Release
-      run: dotnet publish -f net10.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=file:${{ github.workspace }}\keytest.jks -p:AndroidSigningKeyAlias=103 -p:AndroidSigningKeyPass=fuckyou -p:AndroidSigningStorePass=fuckyou
+      run: dotnet publish -f net10.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=file:${{ github.workspace }}\key.keystore -p:AndroidSigningKeyAlias=${{ secrets.ALIAS }} -p:AndroidSigningKeyPass=${{ secrets.PASSWORD }} -p:AndroidSigningStorePass=${{ secrets.PASSWORD }}
 
     - name: Show Github infos
       run:  echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'     
@@ -73,6 +73,7 @@ jobs:
        
     - name: List release dir 
       run: | 
+       dir ${{ github.workspace }}
        dir ${{ github.workspace }}\bin\Release\net10.0-android\
        dir ${{ github.workspace }}\bin\Release\net10.0-android\publish
        
