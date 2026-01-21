@@ -29,6 +29,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      with:
+        packages: |
+          build-tools
+            
     - name: Setup .NET 10
       uses: actions/setup-dotnet@v4
       with:
@@ -57,7 +63,7 @@ jobs:
     - name: Show Github infos
       run: | 
        echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'
-       dir ${{ github.workspace }}\bin\Release\
+       dir ${{ github.workspace }}\bin\Release\net10.0-android\
        
     - name: Sign APK
       uses: r0adkll/sign-android-release@v1
@@ -78,7 +84,10 @@ jobs:
         echo "SIGNEDAPKNAME=$SIGNEDAPKNAME" >> $GITHUB_ENV
         echo SIGNEDAPKNAME: $SIGNEDAPKNAME
 
-      
+    - name: List release dir 
+      run: | 
+       dir ${{ github.workspace }}\bin\Release\net10.0-android\
+       
     - name: Create Release
       uses: actions/create-release@latest
       env:
