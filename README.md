@@ -1,5 +1,8 @@
 # ACNH Chat
 
+## I had to re-code this app again in Visual Studio 2026 because Xamrion is out of support.     
+## I did this app in MAUI. This app will work on across platforms.     
+
 ## This app is for Android phone only.   
 ## I made this app because nooklink SUCKS and it do not work for me.  
 
