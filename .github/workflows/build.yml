@@ -63,7 +63,7 @@ jobs:
       uses: r0adkll/sign-android-release@v1
       id: sign_app
       with:
-        releaseDirectory: ${{ github.workspace }}\bin\Release\net10.0-android\own.acnhchat.apk
+        releaseDirectory: ${{ github.workspace }}\bin\Release\net10.0-android\
         signingKeyBase64: ${{ secrets.KEY }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.PASSWORD }}
