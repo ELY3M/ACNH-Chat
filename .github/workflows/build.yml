@@ -31,9 +31,6 @@ jobs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
-      with:
-        packages: |
-          build-tools
             
     - name: Setup .NET 10
       uses: actions/setup-dotnet@v4
