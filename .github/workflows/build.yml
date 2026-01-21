@@ -35,7 +35,10 @@ jobs:
        dotnet-version: '10.0.x'
  
     - name: Install MAUI workload
-      run: dotnet workload install maui-android
+      run: | 
+       dotnet workload install maui-android
+       dotnet workload install maui-ios
+       dotnet workload install maui-windows
       
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
