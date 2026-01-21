@@ -47,18 +47,12 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
-	  <AndroidKeyStore>True</AndroidKeyStore>
-	  <AndroidSigningStorePass>key103</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>103</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>key103</AndroidSigningKeyPass>
+	  <AndroidKeyStore>False</AndroidKeyStore>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
-	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidKeyStore>False</AndroidKeyStore>
 	  <AndroidPackageFormat>apk</AndroidPackageFormat>
-	  <AndroidSigningStorePass>key103</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>103</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>key103</AndroidSigningKeyPass>
 	</PropertyGroup>
 
 	<ItemGroup>
