@@ -19,7 +19,7 @@
             <Label
                 Text="Switch IP Address"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                SemanticProperties.HeadingLevel="Level2" />
 
 
             <Entry
