@@ -82,7 +82,7 @@ jobs:
     - name: List release dir 
       run: | 
        dir ${{ github.workspace }}
-       dir ${{ github.workspace }}\bin\Release\net10.0-android\
+       dir ${{ github.workspace }}\bin\Release\
        dir ${{ github.workspace }}\bin\Release\net10.0-android\publish
        
     - name: Create Release
