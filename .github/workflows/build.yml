@@ -94,7 +94,7 @@ jobs:
         prerelease: false    
         tag_name: ${{ github.run_number }}
         body: ${{ github.event.head_commit.message }}
-        files: ${{ github.workspace }}\release.apk
+        files: ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk
       env:
         GITHUB_TOKEN: ${{ github.token }} 
         
