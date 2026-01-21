@@ -28,9 +28,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
             
     - name: Setup .NET 10
       uses: actions/setup-dotnet@v4
@@ -60,27 +57,7 @@ jobs:
     - name: Show Github infos
       run: | 
        echo 'Workspace path ${{ github.workspace }} - runner.temp ${{ runner.temp }}'
-       dir ${{ github.workspace }}\bin\Release\net10.0-android\
        
-    - name: Sign APK
-      uses: r0adkll/sign-android-release@v1
-      id: sign_app
-      with:
-        releaseDirectory: ${{ github.workspace }}\bin\Release\net10.0-android\publish
-        signingKeyBase64: ${{ secrets.KEY }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.PASSWORD }}
-        keyPassword: ${{ secrets.PASSWORD }}
-        
-    - name: Output Signed APK
-      env:
-        SIGNEDAPKNAME: ${{ steps.sign_app.outputs.signedReleaseFile }} 
-      run: |
-        echo 'Signed APK is ${{ steps.sign_app.outputs.signedReleaseFile }}'
-        SIGNEDAPKNAME=${{ steps.sign_app.outputs.signedReleaseFile }}
-        echo "SIGNEDAPKNAME=$SIGNEDAPKNAME" >> $GITHUB_ENV
-        echo SIGNEDAPKNAME: $SIGNEDAPKNAME
-
     - name: List release dir 
       run: | 
        dir ${{ github.workspace }}\bin\Release\net10.0-android\
