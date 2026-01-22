@@ -82,12 +82,11 @@ jobs:
       run: | 
        dir ${{ github.workspace }}
        dir ${{ github.workspace }}\bin\Release\
-       dir ${{ github.workspace }}\bin\Release\net10.0-android\publish
-       dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}       
-       dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish
+       dir ${{ github.workspace }}\bin\Release\net10.0-android\publish      
+       dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish
        
     - name: Zipping up Release folder
-      run: 7z a ACNHChat-windows.zip "${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish\${{ env.WINDOWSEXE }}"
+      run: 7z a ACNHChat-windows.zip "${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish\win-x64\${{ env.WINDOWSEXE }}"
              
     - name: Create Release
       uses: actions/create-release@latest
