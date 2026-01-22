@@ -88,7 +88,6 @@ jobs:
          dir ${{ github.workspace }}\bin\Release\net10.0-android\publish      
          dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish
 
-      
     - name: Create Release
       uses: actions/create-release@latest
       env:
