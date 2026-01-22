@@ -83,6 +83,7 @@ jobs:
        dir ${{ github.workspace }}
        dir ${{ github.workspace }}\bin\Release\
        dir ${{ github.workspace }}\bin\Release\net10.0-android\publish
+       dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}       
        dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish
        
     - name: Zipping up Release folder
