@@ -15,6 +15,7 @@ env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .
   KEY: key.keystore
+  NETVERSION: net10.0-windows10.0.19041.0
   WINDOWSEXE: 'ACNH Chat.exe'
   
   # Configuration type to build.
@@ -46,6 +47,18 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: dotnet restore ${{env.SOLUTION_FILE_PATH}}
 
+    - name: Get .NET Version 
+      id: netversion
+      shell: cmd      
+      run: | 
+        FOR /F "delims=" %%i IN ('dotnet msbuild ACNH Chat/ACNH Chat.csproj --getProperty:TargetFramework') DO (SET netversion=%%i)
+        echo %netversion%
+        echo netversion=%netversion%>>%GITHUB_OUTPUT%
+        
+    - name: .NET Version test     
+      run: | 
+        echo ${{ steps.netversion.outputs.netversion }}
+        
     - name: Decode key
       uses: timheuer/base64-to-file@v1.2
       with:
@@ -71,12 +84,15 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
-      run: dotnet publish -c Release -f net10.0-windows10.0.19041.0 -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      run: dotnet publish -c Release -f ${{ env.NETVERSION }} $ -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
 
     # - name: publish-linux
       # working-directory: ${{env.GITHUB_WORKSPACE}}
       # run: dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true      
-       
+
+    - name: Zipping up Release folder
+      run: 7z a ACNHChat-windows.zip "${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish\${{ env.WINDOWSEXE }}"
+      
     - name: Show Github infos
       run: | 
        echo 'Workspace path: ${{ github.workspace }} - runner.temp ${{ runner.temp }}'
@@ -87,6 +103,7 @@ jobs:
        dir ${{ github.workspace }}
        dir ${{ github.workspace }}\bin\Release\
        dir ${{ github.workspace }}\bin\Release\net10.0-android\publish
+       dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish
        
     - name: Create Release
       uses: actions/create-release@latest
@@ -106,7 +123,7 @@ jobs:
         prerelease: false    
         tag_name: ${{ github.run_number }}
         body: ${{ github.event.head_commit.message }}
-        files: ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk ${{ github.workspace }}\bin\Release\net10.0-windows10.0.19041.0\publish\${{ env.WINDOWSEXE }}
+        files: ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk ${{ github.workspace }}\ACNHChat-windows.zip
       env:
         GITHUB_TOKEN: ${{ github.token }} 
         
