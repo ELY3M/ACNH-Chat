@@ -43,8 +43,8 @@ jobs:
  
     - name: Install MAUI workload
       run: | 
-        dotnet workload install maui
-        dotnet workload update
+         dotnet workload install maui
+         dotnet workload update
       
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -59,7 +59,7 @@ jobs:
 
     - name: List workspace dir 
       run: | 
-        dir ${{ github.workspace }}
+         dir ${{ github.workspace }}
        
     - name: publish-android
       working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -83,12 +83,12 @@ jobs:
             
     - name: List Dirs 
       run: | 
-        dir ${{ github.workspace }}
-        dir ${{ github.workspace }}\bin\Release\
-        dir ${{ github.workspace }}\bin\Release\net10.0-android\publish      
-        dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish
-       
-             
+         dir ${{ github.workspace }}
+         dir ${{ github.workspace }}\bin\Release\
+         dir ${{ github.workspace }}\bin\Release\net10.0-android\publish      
+         dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish
+
+      
     - name: Create Release
       uses: actions/create-release@latest
       env:
