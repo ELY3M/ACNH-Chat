@@ -15,11 +15,13 @@ env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .
   KEY: key.keystore
-
+  WINDOWSEXE: 'ACNH Chat.exe'
+  
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
+
 
 permissions: write-all
 
@@ -68,11 +70,12 @@ jobs:
     - name: publish-windows
       working-directory: ${{env.GITHUB_WORKSPACE}}
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
-      run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x64 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
+      run: dotnet publish -c Release -f net10.0-windows10.0.19041.0 -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
 
-    - name: publish-linux
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true      
+    # - name: publish-linux
+      # working-directory: ${{env.GITHUB_WORKSPACE}}
+      # run: dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true      
        
     - name: Show Github infos
       run: | 
@@ -103,7 +106,7 @@ jobs:
         prerelease: false    
         tag_name: ${{ github.run_number }}
         body: ${{ github.event.head_commit.message }}
-        files: ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk
+        files: ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk ${{ github.workspace }}\bin\Release\net10.0-windows10.0.19041.0\publish\${{ env.WINDOWSEXE }}
       env:
         GITHUB_TOKEN: ${{ github.token }} 
         
