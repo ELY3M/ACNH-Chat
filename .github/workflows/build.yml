@@ -115,11 +115,12 @@ jobs:
         
         
       - name: Upload Release
+        run: |
+           gh release upload ${{ github.run_number }} ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk 
+           gh release upload ${{ github.run_number }} ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish\${{ env.WINDOWSEXE }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          gh release upload ${{ github.run_number }} ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk 
-          gh release upload ${{ github.run_number }} ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish\${{ env.WINDOWSEXE }}               
+          
         
         
         
