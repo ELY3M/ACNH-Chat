@@ -99,22 +99,7 @@ jobs:
         tag_name: ${{ github.run_number }}
         body: ${{ github.event.head_commit.message }}
         
-    # softprops/action-gh-release is fucking buggy!!!!!           
-    # - name: Upload Release
-      # uses: softprops/action-gh-release@v2.4.2
-      # with:
-        # draft: false
-        # prerelease: false    
-        # tag_name: ${{ github.run_number }}
-        # body: ${{ github.event.head_commit.message }}
-        # files: | 
-         # ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk 
-         # ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish\${{ env.WINDOWSEXE }}
-      # env:
-        # GITHUB_TOKEN: ${{ github.token }} 
-        
-        
-      - name: Upload Release
+    - name: Upload Release
         run: |
            gh release upload ${{ github.run_number }} ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk 
            gh release upload ${{ github.run_number }} ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish\${{ env.WINDOWSEXE }}
