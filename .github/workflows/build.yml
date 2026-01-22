@@ -84,7 +84,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
-      run: dotnet publish -c Release -f ${{ env.NETVERSION }} $ -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      run: dotnet publish -c Release -f ${{ env.NETVERSION }} -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
 
     # - name: publish-linux
       # working-directory: ${{env.GITHUB_WORKSPACE}}
