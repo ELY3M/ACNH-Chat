@@ -95,7 +95,7 @@ jobs:
       with:
         draft: false
         prerelease: false
-        release_name: ${{ steps.version.outputs.version }}
+        release_name: ${{ github.run_number }} ###${{ steps.version.outputs.version }}
         tag_name: ${{ github.run_number }}
         body: ${{ github.event.head_commit.message }}
         
