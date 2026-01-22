@@ -46,18 +46,6 @@ jobs:
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: dotnet restore ${{env.SOLUTION_FILE_PATH}}
-
-    - name: Get .NET Version 
-      id: netversion
-      shell: cmd      
-      run: | 
-        FOR /F "delims=" %%i IN ('dotnet msbuild ACNH Chat/ACNH Chat.csproj --getProperty:TargetFramework') DO (SET netversion=%%i)
-        echo %netversion%
-        echo netversion=%netversion%>>%GITHUB_OUTPUT%
-        
-    - name: .NET Version test     
-      run: | 
-        echo ${{ steps.netversion.outputs.netversion }}
         
     - name: Decode key
       uses: timheuer/base64-to-file@v1.2
@@ -89,22 +77,17 @@ jobs:
     # - name: publish-linux
       # working-directory: ${{env.GITHUB_WORKSPACE}}
       # run: dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true      
-
-    - name: Zipping up Release folder
-      run: 7z a ACNHChat-windows.zip "${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish\${{ env.WINDOWSEXE }}"
-      
-    - name: Show Github infos
-      run: | 
-       echo 'Workspace path: ${{ github.workspace }} - runner.temp ${{ runner.temp }}'
-       echo 'Key path: ${{ github.workspace }}\${{env.KEY}}'       
-       
-    - name: List release dir 
+            
+    - name: List Dirs 
       run: | 
        dir ${{ github.workspace }}
        dir ${{ github.workspace }}\bin\Release\
        dir ${{ github.workspace }}\bin\Release\net10.0-android\publish
        dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish
        
+    - name: Zipping up Release folder
+      run: 7z a ACNHChat-windows.zip "${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\publish\${{ env.WINDOWSEXE }}"
+             
     - name: Create Release
       uses: actions/create-release@latest
       env:
