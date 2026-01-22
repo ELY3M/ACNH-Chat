@@ -25,6 +25,8 @@ env:
 
 
 permissions: write-all
+
+permissions:
   contents: write
 
 jobs:
