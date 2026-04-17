@@ -9,7 +9,7 @@ namespace ACNH_Chat
     {
         private Socket socket;
         //updated offset to work on latest verion of ACNH Game.  
-        private static string chat = "[main+5254A40]+40"; /// OLD "[main+4AA9CD8]+40";
+        private static string chat = "[main+5255A60]+40"; //"[main+5254A40]+40";//"[main+4AA9CD8]+40";
         private static bool sendLock = false;
 
         String getipaddress = "";
