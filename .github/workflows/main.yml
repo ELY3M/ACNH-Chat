@@ -51,7 +51,7 @@ jobs:
       
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dotnet restore "ACNH Chat.slnx" -f net10.0-android
+      run: dotnet restore "ACNH Chat.slnx" -p:TargetFramework=net10.0-android
         
     - name: Decode key
       uses: timheuer/base64-to-file@v1.2
