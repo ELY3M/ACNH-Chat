@@ -82,7 +82,9 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
-      run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows -c Release -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      ###run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows -c Release -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows10.0.17763.0 -c Release -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+
 
     # - name: publish-linux
       # working-directory: ${{env.GITHUB_WORKSPACE}}
@@ -122,8 +124,8 @@ jobs:
         
     - name: Upload Release
       run: |
-           gh release upload ${{ github.run_number }} ${{ github.workspace }}/bin/Release/net10.0-android/publish/own.acnhchat-Signed.apk 
-           gh release upload ${{ github.run_number }} "${{ github.workspace }}/bin/Release/${{ env.NETVERSION }}/win-x64/publish/${{ env.WINDOWSEXE }}"
+        gh release upload ${{ github.run_number }} ${{ github.workspace }}/bin/Release/net10.0-android/publish/own.acnhchat-Signed.apk 
+        gh release upload ${{ github.run_number }} "${{ github.workspace }}/bin/Release/${{ env.NETVERSION }}/win-x64/publish/${{ env.WINDOWSEXE }}"
       env:
         GITHUB_TOKEN: ${{ github.token }}
           
