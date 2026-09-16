@@ -17,7 +17,7 @@ env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .
   KEY: key.keystore
-  NETVERSION: net10.0-windows10.0.19041.0
+  NETVERSION: net10.0-windows  ##was net10.0-windows10.0.19041.0
   WINDOWSEXE: 'ACNH Chat.exe'
   
   # Configuration type to build.
@@ -51,7 +51,7 @@ jobs:
       
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dotnet restore . -f net10.0-android
+      run: dotnet restore "ACNH Chat.slnx" -f net10.0-android
         
     - name: Decode key
       uses: timheuer/base64-to-file@v1.2
@@ -72,13 +72,13 @@ jobs:
       ###dotnet publish -c Release -r linux-x64 --self-contained true -o ./publish_ubuntu
       ###dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=myapp.keystore -p:AndroidSigningKeyAlias=myapp -p:AndroidSigningKeyPass=file:C:\Users\user1\AndroidSigningPassword.txt -p:AndroidSigningStorePass=file:C:\Users\user1\AndroidSigningPassword.txt      
       ###run: dotnet publish -f net10.0-android -c Release
-      run: dotnet publish -f net10.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{ github.workspace }}\${{env.KEY}} -p:AndroidSigningKeyAlias=${{ secrets.ALIAS }} -p:AndroidSigningKeyPass=${{ secrets.PASSWORD }} -p:AndroidSigningStorePass=${{ secrets.PASSWORD }}
+      run: dotnet publish "ACNH Chat.slnx" -f net10.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{ github.workspace }}\${{env.KEY}} -p:AndroidSigningKeyAlias=${{ secrets.ALIAS }} -p:AndroidSigningKeyPass=${{ secrets.PASSWORD }} -p:AndroidSigningStorePass=${{ secrets.PASSWORD }}
       
     - name: publish-windows
       working-directory: ${{env.GITHUB_WORKSPACE}}
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
-      run: dotnet publish -c Release -f ${{ env.NETVERSION }} -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      run: dotnet publish "ACNH Chat.slnx" -c Release -f ${{ env.NETVERSION }} -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
 
     # - name: publish-linux
       # working-directory: ${{env.GITHUB_WORKSPACE}}
