@@ -83,7 +83,7 @@ jobs:
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
       ###run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows -c Release -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
-      run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows10.0.17763.0 -c Release -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows10.0.17763.0 -c Release -p:EnableWindowsTargeting=true -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
 
 
     # - name: publish-linux
