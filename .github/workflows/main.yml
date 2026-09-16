@@ -76,14 +76,14 @@ jobs:
     
     - name: Restore NuGet packages for windows
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dotnet restore "ACNH Chat.slnx" -p:TargetFramework=net10.0-windows -p:MtouchTargetsEnabled=false
+      run: dotnet restore "ACNH Chat.slnx" -p:TargetFramework=net10.0-windows10.0.17763.0 -p:MtouchTargetsEnabled=false
     
     - name: publish-windows
       working-directory: ${{env.GITHUB_WORKSPACE}}
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
       ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
       ###run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows -c Release -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
-      run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows10.0.17763.0 -c Release -p:EnableWindowsTargeting=true -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+      run: dotnet publish "ACNH Chat.slnx" --no-restore -p:TargetFramework=net10.0-windows10.0.17763.0 -c Release -p:EnableWindowsTargeting=true -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -o ./publish-windows
 
 
     # - name: publish-linux
@@ -94,8 +94,6 @@ jobs:
       run: | 
          ls ${{ github.workspace }}
          ls ${{ github.workspace }}/bin/Release/
-         ls ${{ github.workspace }}/bin/Release/net10.0-android/publish      
-         ls ${{ github.workspace }}/bin/Release/${{ env.NETVERSION }}/win-x64/publish
 
     - name: Create Release
       uses: actions/create-release@latest
@@ -125,7 +123,7 @@ jobs:
     - name: Upload Release
       run: |
         gh release upload ${{ github.run_number }} ${{ github.workspace }}/bin/Release/net10.0-android/publish/own.acnhchat-Signed.apk 
-        gh release upload ${{ github.run_number }} "${{ github.workspace }}/bin/Release/${{ env.NETVERSION }}/win-x64/publish/${{ env.WINDOWSEXE }}"
+        gh release upload ${{ github.run_number }} "${{ github.workspace }}/publish-windows/${{ env.WINDOWSEXE }}"
       env:
         GITHUB_TOKEN: ${{ github.token }}
           
