@@ -7,7 +7,9 @@ name: Android Build
 
 on:
   push:
+    branches: [ "*" ]
   pull_request:
+    branches: [ "*" ]
   workflow_dispatch:
   workflow_call:
   
@@ -28,7 +30,7 @@ permissions: write-all
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -45,7 +47,7 @@ jobs:
       
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dotnet restore ${{env.SOLUTION_FILE_PATH}}
+      run: dotnet restore .
         
     - name: Decode key
       uses: timheuer/base64-to-file@v1.2
@@ -80,10 +82,10 @@ jobs:
             
     - name: List Dirs 
       run: | 
-         dir ${{ github.workspace }}
-         dir ${{ github.workspace }}\bin\Release\
-         dir ${{ github.workspace }}\bin\Release\net10.0-android\publish      
-         dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish
+         ls ${{ github.workspace }}
+         ls ${{ github.workspace }}\bin\Release\
+         ls ${{ github.workspace }}\bin\Release\net10.0-android\publish      
+         ls ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish
 
     - name: Create Release
       uses: actions/create-release@latest
