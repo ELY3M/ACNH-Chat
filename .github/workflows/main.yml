@@ -76,7 +76,7 @@ jobs:
     
     - name: Restore NuGet packages for windows
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dotnet restore "ACNH Chat.slnx" -p:TargetFramework=net10.0-windows10.0.17763.0 -p:EnableWindowsTargeting=true -p:MtouchTargetsEnabled=false
+      run: dotnet restore "ACNH Chat.slnx" -p:TargetFramework=net10.0-windows10.0.17763.0 -p:EnableWindowsTargeting=true -p:RuntimeIdentifierOverride=win10-x64 -p:MtouchTargetsEnabled=false
     
     - name: publish-windows
       working-directory: ${{env.GITHUB_WORKSPACE}}
