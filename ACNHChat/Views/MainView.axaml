@@ -1,0 +1,74 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:ACNHChat.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="350"
+             x:Class="ACNHChat.Views.MainView"
+             x:DataType="vm:MainViewModel"
+             Background="Black">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+
+<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+
+
+
+    <TextBlock Text="Switch IP Address"
+               Foreground="White"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center" />
+
+
+    <TextBox Text="Input your Switch IP Address"
+             x:Name="ipaddresstext"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center" />
+
+
+    <Button Content="Connect"
+            x:Name="connectbutton"
+            Click="Connect_Click" 
+            Foreground="Black"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+
+    <TextBlock Text="Chat"
+               Foreground="White"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center" />
+
+    <TextBox Text="Input your message"
+             x:Name="chattext"
+             MaxLength="25"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center" />
+
+    <Button Content="Start Chat"
+            x:Name="startchat"
+            Click="Startchat_Click"
+            Foreground="Black"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+
+    <Button Content="Send"
+            x:Name="sendbutton"
+            Click="Sendchat_Click"
+            Foreground="Black"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+
+
+    <TextBlock Text="Status"
+               x:Name="status"
+               Foreground="White"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center" />
+
+</StackPanel>
+
+</UserControl>

@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="ACNHChat.Android/ACNHChat.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="ACNHChat.Browser/ACNHChat.Browser.csproj" />
+  <Project Path="ACNHChat.Desktop/ACNHChat.Desktop.csproj" />
+  <Project Path="ACNHChat.iOS/ACNHChat.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="ACNHChat/ACNHChat.csproj" />
+</Solution>

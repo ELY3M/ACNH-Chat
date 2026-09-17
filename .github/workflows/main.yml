@@ -1,5 +1,3 @@
-# MAUI is fucking trash!!!!! if you cant build MAUI apps on ubuntu-latest!!!!  FUCK YOU microsoft!!!!!    
-
 name: Build
 
 on:
@@ -10,80 +8,60 @@ on:
   workflow_dispatch:
   workflow_call:
 
-env:
-  # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: .
-  KEY: key.keystore
-  NETVERSION: net10.0-windows10.0.19041.0
-  WINDOWSEXE: 'ACNH Chat.exe'
-  
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
-
-
 permissions: write-all
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-            
-    - name: Setup .NET 10
+    - uses: actions/checkout@v7
+
+    - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
        dotnet-version: '10.0.x'
- 
-    - name: Install MAUI workload
-      run: | 
-         dotnet workload install maui
-         dotnet workload update
       
-    - name: Restore NuGet packages
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: dotnet restore ${{env.SOLUTION_FILE_PATH}}
-        
+    - name: Restore .NET Workloads
+      run: dotnet workload restore
+  
+    - name: Setup Java
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'zulu'
+        java-version: 21
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v4
+      with:
+        packages: 'platform-tools'  
+          
     - name: Decode key
       uses: timheuer/base64-to-file@v1.2
       with:
-       fileName: ${{env.KEY}}
+       fileName: key.jks
        fileDir: ${{ github.workspace }}
        encodedString: ${{ secrets.KEY }}
+     
+               
+    - name: build windows 
+      run: |
+        dotnet publish ${{ github.workspace }}/ACNHChat.Desktop/ACNHChat.Desktop.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseMonoRuntime=false -o ./publish-windows
 
-    - name: List workspace dir 
-      run: | 
-         dir ${{ github.workspace }}
-       
-    - name: publish-android
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      # run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
-      ###dotnet publish -c Release -r linux-x64 --self-contained true -o ./publish_ubuntu
-      ###dotnet publish -f net8.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=myapp.keystore -p:AndroidSigningKeyAlias=myapp -p:AndroidSigningKeyPass=file:C:\Users\user1\AndroidSigningPassword.txt -p:AndroidSigningStorePass=file:C:\Users\user1\AndroidSigningPassword.txt      
-      ###run: dotnet publish -f net10.0-android -c Release
-      run: dotnet publish -f net10.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{ github.workspace }}\${{env.KEY}} -p:AndroidSigningKeyAlias=${{ secrets.ALIAS }} -p:AndroidSigningKeyPass=${{ secrets.PASSWORD }} -p:AndroidSigningStorePass=${{ secrets.PASSWORD }}
-      
-    - name: publish-windows
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
-      ###run: dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true -p:UseMonoRuntime=false
-      run: dotnet publish -c Release -f ${{ env.NETVERSION }} -p:RuntimeIdentifierOverride=win10-x64 -p:SelfContained=true -p:PublishSingleFile=true -p:WindowsAppSDKSelfContained=true
+    - name: build linux
+      run: |
+        dotnet publish ${{ github.workspace }}/ACNHChat.Desktop/ACNHChat.Desktop.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseMonoRuntime=false -o ./publish-linux
 
-    # - name: publish-linux
-      # working-directory: ${{env.GITHUB_WORKSPACE}}
-      # run: dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true      
-            
-    - name: List Dirs 
-      run: | 
-         dir ${{ github.workspace }}
-         dir ${{ github.workspace }}\bin\Release\
-         dir ${{ github.workspace }}\bin\Release\net10.0-android\publish      
-         dir ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish
+    - name: build android
+      run: |
+        dotnet publish ${{ github.workspace }}/ACNHChat.Android/ACNHChat.Android.csproj -f net10.0-android -c Release -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=${{ github.workspace }}/key.jks -p:AndroidSigningKeyAlias=${{ secrets.ALIAS }} -p:AndroidSigningKeyPass=${{ secrets.PASSWORD }} -p:AndroidSigningStorePass=${{ secrets.PASSWORD }} -o ./publish-android
 
+    - name: list
+      run: |
+        ls -la publish-windows
+        ls -la publish-linux
+        ls -la publish-windows  
+        
     - name: Create Release
       uses: actions/create-release@latest
       env:
@@ -91,31 +69,21 @@ jobs:
       with:
         draft: false
         prerelease: false
-        release_name: ${{ github.run_number }} ###${{ steps.version.outputs.version }}
+        release_name: ${{ steps.version.outputs.version }}
         tag_name: ${{ github.run_number }}
         body: ${{ github.event.head_commit.message }}
 
-    # softprops/action-gh-release is fucking buggy!!!!!           
-    # - name: Upload Release
-      # uses: softprops/action-gh-release@v2.4.2
-      # with:
-        # draft: false
-        # prerelease: false    
-        # tag_name: ${{ github.run_number }}
-        # body: ${{ github.event.head_commit.message }}
-        # files: | 
-         # ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk 
-         # ${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish\${{ env.WINDOWSEXE }}
-      # env:
-        # GITHUB_TOKEN: ${{ github.token }} 
-        
     - name: Upload Release
-      run: |
-           gh release upload ${{ github.run_number }} ${{ github.workspace }}\bin\Release\net10.0-android\publish\own.acnhchat-Signed.apk 
-           gh release upload ${{ github.run_number }} "${{ github.workspace }}\bin\Release\${{ env.NETVERSION }}\win-x64\publish\${{ env.WINDOWSEXE }}"
+      uses: softprops/action-gh-release@v2
+      with:
+        draft: false
+        prerelease: false    
+        tag_name: ${{ github.run_number }}
+        body: ${{ github.event.head_commit.message }}
+        files: ${{ github.workspace }}/publish-windows/ACNHChat.Desktop.exe, ${{ github.workspace }}/publish-linux/ACNHChat.Desktop, ${{ github.workspace }}/publish-android/own.ACNHChat-Signed.apk
       env:
-        GITHUB_TOKEN: ${{ github.token }}
-          
+        GITHUB_TOKEN: ${{ github.token }} 
         
         
+
         

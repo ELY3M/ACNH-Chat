@@ -1,6 +1,3 @@
-::dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=Exe --self-contained true -r win-x64 /p:PublishSingleFile=True
-::dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None
-::dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None --self-contained true /p:PublishSingleFile=True
-::dotnet publish  -f net10.0-windows10.0.19041.0 -c Release -p:WindowsPackageType=None -p:PublishSingleFile=true --self-contained true -p:WindowsAppSDKSelfContained=true
-::dotnet publish -f net10.0-android -c Release  
-dotnet publish -f net10.0-windows10.0.19041.0 -c Release -r win-x86 -p:WindowsPackageType=None --self-contained true -p:WindowsAppSDKSelfContained=true
+dotnet publish ACNHChat.Desktop\ACNHChat.Desktop.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseMonoRuntime=false -o ./publish-windows
+dotnet publish ACNHChat.Desktop\ACNHChat.Desktop.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseMonoRuntime=false -o ./publish-linux
+dotnet publish ACNHChat.Android\ACNHChat.Android.csproj -f net10.0-android -c Release -p:JavaSdkDirectory="D:\Java\jdk-21.0.6" -p:AndroidKeyStore=true -p:AndroidSigningKeyStore=H:\dev\phonedev\key.jks -p:AndroidSigningKeyAlias=103 -p:AndroidSigningKeyPass=key103 -p:AndroidSigningStorePass=key103 -o ./publish-android
