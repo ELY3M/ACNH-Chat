@@ -6,7 +6,7 @@ using Avalonia.Android;
 namespace ACNHChat.Android;
 
 [Activity(
-    Label = "ACNHChat.Android",
+    Label = "ACNH Chat",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@drawable/icon",
     MainLauncher = true,

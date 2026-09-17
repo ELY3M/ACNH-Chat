@@ -40,4 +40,8 @@ My fucking brain
 
 ## Screenshot
 
-   ![Image](screenshot.png)
+![Image](screenshot-windows.png)
+
+![Image](screenshot-android.png)
+
+
