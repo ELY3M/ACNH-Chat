@@ -1,0 +1,43 @@
+# ACNH Chat
+
+
+## I did re-code this app again.  this time with Avalonia UI: The Cross-Platform .NET UI Framework for Desktop
+Now, this app should work on Android, Windows, and Linux devices.      
+
+## I had to re-code this app again in Visual Studio 2026 because Xamrion is out of support.     
+## I did this app in MAUI. This app will work on across platforms.     
+
+## This app is for Android phone only.   
+## I made this app because nooklink SUCKS and it do not work for me.  
+
+## Prerequisite
+
+   1. A Nintendo Switch capable of running unsigned code.
+   2. [sys-botbase](https://github.com/olliz0r/sys-botbase) installed on your Switch.
+   3. A copy of Animal Crossing™: New Horizons for the Nintendo Switch
+   4. Android Phone, windows machine, or linux machine  
+   
+## Installation
+
+   1. Download APK from release page on your phone. 
+   2. allow APK from external source. 
+   3. install :) 
+   
+   
+## Usage  
+	
+1. put in your switch ip address
+2. Click on "Connect" button 
+3. Click on "Start chat" button
+4. type in whatever you want.  
+5. Click on "Send Chat"  
+
+## Credit 
+I used some of ACNHPokerCore codes for connection and chat parts. 
+Thank you to [MyShiLingStar](https://github.com/MyShiLingStar/ACNHPokerCore)
+
+My fucking brain  
+
+## Screenshot
+
+   ![Image](screenshot.png)
