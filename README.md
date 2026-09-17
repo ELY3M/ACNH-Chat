@@ -42,6 +42,8 @@ My fucking brain
 
 ![Image](screenshot-windows.png)
 
+![Image](screenshot-linux.png)
+
 ![Image](screenshot-android.png)
 
 
